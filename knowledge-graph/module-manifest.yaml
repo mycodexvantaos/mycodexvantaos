@@ -1,0 +1,7 @@
+apiVersion: codexvantaos.org/v1
+kind: ModuleManifest
+metadata:
+  name: mycodexvantaos-core-auth
+spec:
+  domain: core
+  capability: auth

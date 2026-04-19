@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mycodexvantaos-core-kernel-config
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-core-kernel
+    part-of: mycodexvantaos
+data:
+  NODE_ENV: "production"
+  SERVICE_NAME: "mycodexvantaos-core-kernel"
+  PORT: "3000"
+  LOG_LEVEL: "info"

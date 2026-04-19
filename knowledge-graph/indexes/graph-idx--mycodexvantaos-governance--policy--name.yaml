@@ -1,0 +1,5 @@
+id: graph-idx--mycodexvantaos-governance--policy--name
+service: mycodexvantaos-governance
+label: policy
+property: name
+type: exact

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@mycodexvantaos/*": [
+        "services/mycodexvantaos-*/src/index.ts",
+        "packages/mycodexvantaos-*/src/index.ts",
+        "services/mycodexvantaos-*/src",
+        "packages/mycodexvantaos-*/src"
+      ]
+    }
+  },
+  "extends": "./tsconfig.base.json",
+  "include": ["services/**/*.ts", "packages/**/*.ts", "ci/**/*.ts", "simulation.ts"]
+}

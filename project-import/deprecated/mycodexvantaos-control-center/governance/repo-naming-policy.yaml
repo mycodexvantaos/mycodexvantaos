@@ -1,0 +1,103 @@
+version: "1.1"
+policy_id: "codexvanta-os-repo-naming-policy"
+status: "active"
+
+canonical_prefix: "codexvanta-os-"
+
+validation:
+  regex: "^codexvanta-os-[a-z0-9]+(?:-[a-z0-9]+)*$"
+  strict_mode_default: true
+  reject_if_not_in_allowlist_when_strict: true
+  enforcement_level: error
+
+character_rules:
+  lowercase_only: true
+  allow_digits: true
+  separator: "-"
+  forbid:
+    - "_"
+    - "."
+    - " "
+    - "--"
+
+forbidden_patterns:
+  - ".*_.*"
+  - ".*\\..*"
+  - ".*\\s+.*"
+  - ".*--.*"
+  - ".*-(dev|prod|staging|test)$"
+  - ".*-v[0-9]+$"
+
+approved_planes:
+  - control-plane
+  - execution-plane
+  - governance-plane
+  - integration-plane
+  - data-plane
+  - observability-plane
+  - experience-plane
+  - sandbox-plane
+  - decision-plane
+
+approved_repo_types:
+  - tool
+  - service
+  - security-service
+  - infrastructure-service
+  - data-service
+  - management-service
+  - identity-service
+  - messaging-service
+  - core-library
+  - intelligence-service
+  - decision-service
+  - governance-service
+  - governance-core
+  - control-plane
+  - sandbox
+  - analysis-engine
+  - core-runtime
+  - application-core
+  - observability-platform
+  - gitops-agent
+  - infrastructure-base
+  - application
+  - ui-library
+  - module-pack
+  - workflow-library
+
+approved_current_repositories:
+  - codexvanta-os-cli
+  - codexvanta-os-scheduler
+  - codexvanta-os-secret-vault
+  - codexvanta-os-network-mesh
+  - codexvanta-os-data-pipeline
+  - codexvanta-os-config-manager
+  - codexvanta-os-auth-service
+  - codexvanta-os-event-bus
+  - codexvanta-os-automation-core
+  - codexvanta-os-ai-engine
+  - codexvanta-os-decision-engine
+  - codexvanta-os-policy-engine
+  - codexvanta-os-governance-autonomy
+  - codexvanta-os-control-center
+  - codexvanta-os-fleet-sandbox
+  - codexvanta-os-core-code-deconstructor
+  - codexvanta-os-core-kernel
+  - codexvanta-os-core-main
+  - codexvanta-os-observability-stack
+  - codexvanta-os-infra-gitops
+  - codexvanta-os-infra-base
+  - codexvanta-os-app-portal
+  - codexvanta-os-app-ui
+  - codexvanta-os-module-suite
+  - codexvanta-os-workflows
+
+governance:
+  rename_requires_review: true
+  registry_sync_required: true
+  workflow_reference_sync_required: true
+  fixture_sync_required: true
+  graph_sync_required: true
+  vector_index_sync_required: true
+  uri_urn_mapping_sync_required: true

@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-control-center
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-control-center
+    part-of: mycodexvantaos
+    component: control-center
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mycodexvantaos-control-center
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-control-center
+        part-of: mycodexvantaos
+        component: control-center
+    spec:
+      containers:
+        - name: mycodexvantaos-control-center
+          image: registry.local/mycodexvantaos/mycodexvantaos-control-center:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mycodexvantaos-control-center-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

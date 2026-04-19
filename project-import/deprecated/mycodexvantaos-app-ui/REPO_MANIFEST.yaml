@@ -1,0 +1,28 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-app-ui
+  description: 應用 UI — Web 管理控制台前端
+  layer: C-NativeServices
+  layerDescription: 原生服務層 — 平台內建服務（零第三方依賴可運行）
+  plane: Experience
+  planeDescription: 體驗面 — UI、CLI、使用者介面
+  tier: 3
+  tags:
+  - ui
+  - frontend
+  - dashboard
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - web-ui
+  - dashboard
+  - management-console
+  providerDependencies:
+  - auth
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-auth-service

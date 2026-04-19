@@ -1,0 +1,29 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-infra-gitops
+  description: GitOps 基礎設施 — ArgoCD/Flux、宣告式部署
+  layer: E-DeployTarget
+  layerDescription: 部署目標層 — 多目標部署支援
+  plane: Control
+  planeDescription: 控制面 — 平台核心控制與配置
+  tier: 2
+  tags:
+  - gitops
+  - argocd
+  - deployment
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - gitops
+  - declarative-deployment
+  - drift-detection
+  providerDependencies:
+  - repo
+  - deploy
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-infra-base

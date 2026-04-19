@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mycodexvantaos-decision-engine-config
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-decision-engine
+    part-of: mycodexvantaos
+data:
+  NODE_ENV: "production"
+  SERVICE_NAME: "mycodexvantaos-decision-engine"
+  PORT: "3000"
+  LOG_LEVEL: "info"

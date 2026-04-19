@@ -1,0 +1,31 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-automation-core
+  description: 自動化核心 — 工作流定義、步驟執行、狀態機
+  layer: B-Runtime
+  layerDescription: 運行層 — 核心運行時、事件處理、任務執行
+  plane: Execution
+  planeDescription: 執行面 — 任務、工作流、自動化
+  tier: 3
+  tags:
+  - automation
+  - workflow
+  - state-machine
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - workflow-execution
+  - step-runner
+  - state-machine
+  providerDependencies:
+  - queue
+  - stateStore
+  - database
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-event-bus
+  - codexvanta-os-scheduler

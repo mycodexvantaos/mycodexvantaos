@@ -1,0 +1,30 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-scheduler
+  description: 任務排程器 — Cron、延遲任務、任務編排
+  layer: B-Runtime
+  layerDescription: 運行層 — 核心運行時、事件處理、任務執行
+  plane: Execution
+  planeDescription: 執行面 — 任務、工作流、自動化
+  tier: 2
+  tags:
+  - scheduler
+  - cron
+  - tasks
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - task-scheduling
+  - cron
+  - delayed-execution
+  providerDependencies:
+  - queue
+  - stateStore
+  - database
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-event-bus

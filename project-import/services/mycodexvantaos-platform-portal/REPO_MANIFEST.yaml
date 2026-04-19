@@ -1,0 +1,30 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-app-portal
+  description: 應用入口 — 使用者入口、多租戶管理
+  layer: C-NativeServices
+  layerDescription: 原生服務層 — 平台內建服務（零第三方依賴可運行）
+  plane: Experience
+  planeDescription: 體驗面 — UI、CLI、使用者介面
+  tier: 4
+  tags:
+  - portal
+  - multi-tenant
+  - marketplace
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - user-portal
+  - multi-tenancy
+  - marketplace
+  providerDependencies:
+  - auth
+  - database
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-auth-service
+  - codexvanta-os-app-ui

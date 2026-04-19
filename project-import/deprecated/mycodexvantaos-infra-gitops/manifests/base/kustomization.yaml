@@ -1,0 +1,45 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Global orchestration kustomization — manages the mycodexvantaos namespace
+# and all 25 deployed service manifests (P3 complete — all services onboarded)
+# Apply with: kubectl apply -k modules/mycodexvantaos-infra-gitops/manifests/base/
+
+resources:
+  - namespace.yaml
+  # infra-gitops controller itself
+  - deployment.yaml
+  - service.yaml
+  - configmap.yaml
+  # Tier 0 — core-kernel (already managed)
+  - ../../../modules/mycodexvantaos-core-kernel/manifests/base
+  # Tier 0 — auth-service (already managed)
+  - ../../../modules/mycodexvantaos-auth-service/manifests/base
+  # Tier 0 — protocol-registry (already managed)
+  - ../../../services/protocol-registry/manifests/base
+  - ../../../modules/mycodexvantaos-ai-engine/manifests/base
+  - ../../../modules/mycodexvantaos-app-portal/manifests/base
+  - ../../../modules/mycodexvantaos-app-ui/manifests/base
+  - ../../../modules/mycodexvantaos-automation-core/manifests/base
+  - ../../../modules/mycodexvantaos-automation-scheduler/manifests/base
+  - ../../../modules/mycodexvantaos-automation-workflows/manifests/base
+  - ../../../modules/mycodexvantaos-config-manager/manifests/base
+  - ../../../modules/mycodexvantaos-control-center/manifests/base
+  - ../../../modules/mycodexvantaos-control-cli/manifests/base
+  - ../../../modules/mycodexvantaos-core-code-deconstructor/manifests/base
+  - ../../../modules/mycodexvantaos-core-main/manifests/base
+  - ../../../modules/mycodexvantaos-data-pipeline/manifests/base
+  - ../../../modules/mycodexvantaos-decision-engine/manifests/base
+  - ../../../modules/mycodexvantaos-event-bus/manifests/base
+  - ../../../modules/mycodexvantaos-fleet-sandbox/manifests/base
+  - ../../../modules/mycodexvantaos-governance-autonomy/manifests/base
+  - ../../../modules/mycodexvantaos-infra-base/manifests/base
+  - ../../../modules/mycodexvantaos-module-suite/manifests/base
+  - ../../../modules/mycodexvantaos-network-mesh/manifests/base
+  - ../../../modules/mycodexvantaos-observability-stack/manifests/base
+  - ../../../modules/mycodexvantaos-policy-engine/manifests/base
+  - ../../../modules/mycodexvantaos-secret-vault/manifests/base
+
+commonAnnotations:
+  managed-by: mycodexvantaos-gitops
+  gitops-version: v2

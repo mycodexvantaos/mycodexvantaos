@@ -1,0 +1,191 @@
+{
+  "action": "sync",
+  "orchestration_id": null,
+  "target_planes": "all",
+  "total_repositories": 24,
+  "tiers": 9,
+  "execution_order": [
+    {
+      "name": "codexvanta-os-control-center",
+      "plane": "control-plane",
+      "tier": 0,
+      "priority": 0,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-core-code-deconstructor",
+      "plane": "execution-plane",
+      "tier": 0,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-cli",
+      "plane": "execution-plane",
+      "tier": 0,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-infra-base",
+      "plane": "execution-plane",
+      "tier": 0,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-policy-engine",
+      "plane": "governance-plane",
+      "tier": 1,
+      "priority": 0,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-infra-gitops",
+      "plane": "integration-plane",
+      "tier": 1,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-secret-vault",
+      "plane": "governance-plane",
+      "tier": 2,
+      "priority": 0,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-network-mesh",
+      "plane": "integration-plane",
+      "tier": 2,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-core-main",
+      "plane": "control-plane",
+      "tier": 3,
+      "priority": 0,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-config-manager",
+      "plane": "governance-plane",
+      "tier": 3,
+      "priority": 0,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-event-bus",
+      "plane": "integration-plane",
+      "tier": 3,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-auth-service",
+      "plane": "governance-plane",
+      "tier": 4,
+      "priority": 0,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-scheduler",
+      "plane": "execution-plane",
+      "tier": 4,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-data-pipeline",
+      "plane": "data-plane",
+      "tier": 4,
+      "priority": 2,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-app-ui",
+      "plane": "experience-plane",
+      "tier": 5,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-core-kernel",
+      "plane": "execution-plane",
+      "tier": 5,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-observability-stack",
+      "plane": "observability-plane",
+      "tier": 5,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-ai-engine",
+      "plane": "decision-plane",
+      "tier": 5,
+      "priority": 2,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-module-suite",
+      "plane": "experience-plane",
+      "tier": 6,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-decision-engine",
+      "plane": "decision-plane",
+      "tier": 6,
+      "priority": 2,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-automation-core",
+      "plane": "execution-plane",
+      "tier": 7,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-app-portal",
+      "plane": "experience-plane",
+      "tier": 7,
+      "priority": 1,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-governance-autonomy",
+      "plane": "governance-plane",
+      "tier": 8,
+      "priority": 0,
+      "action": "sync"
+    },
+    {
+      "name": "codexvanta-os-fleet-sandbox",
+      "plane": "sandbox-plane",
+      "tier": 8,
+      "priority": 3,
+      "action": "sync"
+    }
+  ],
+  "metadata": {
+    "max_tier": 8,
+    "planes": [
+      "observability-plane",
+      "sandbox-plane",
+      "data-plane",
+      "control-plane",
+      "governance-plane",
+      "experience-plane",
+      "integration-plane",
+      "execution-plane",
+      "decision-plane"
+    ]
+  }
+}

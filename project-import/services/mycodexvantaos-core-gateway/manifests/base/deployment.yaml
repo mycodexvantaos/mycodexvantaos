@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-core-main
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-core-main
+    part-of: mycodexvantaos
+    component: core-main
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mycodexvantaos-core-main
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-core-main
+        part-of: mycodexvantaos
+        component: core-main
+    spec:
+      containers:
+        - name: mycodexvantaos-core-main
+          image: registry.local/mycodexvantaos/mycodexvantaos-core-main:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mycodexvantaos-core-main-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

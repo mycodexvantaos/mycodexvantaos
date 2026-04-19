@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-core-auth
+spec:
+  selector:
+    matchLabels:
+      app: mycodexvantaos-core-auth
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-core-auth
+    spec:
+      containers:
+      - name: mycodexvantaos-core-auth
+        image: registry.internal/mycodexvantaos/mycodexvantaos-core-auth:latest

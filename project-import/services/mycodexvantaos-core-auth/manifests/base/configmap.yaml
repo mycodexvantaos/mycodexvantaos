@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mycodexvantaos-auth-service-config
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-auth-service
+    part-of: mycodexvantaos
+data:
+  NODE_ENV: "production"
+  SERVICE_NAME: "mycodexvantaos-auth-service"
+  PORT: "3001"
+  LOG_LEVEL: "info"

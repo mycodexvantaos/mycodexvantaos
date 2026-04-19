@@ -1,0 +1,31 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-governance-autonomy
+  description: 自治治理 — 自動化治理決策、合規監控
+  layer: B-Runtime
+  layerDescription: 運行層 — 核心運行時、事件處理、任務執行
+  plane: Governance
+  planeDescription: 治理面 — 策略、合規、自治
+  tier: 4
+  tags:
+  - governance
+  - autonomy
+  - compliance
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - autonomous-governance
+  - compliance-monitoring
+  - auto-remediation
+  providerDependencies:
+  - database
+  - stateStore
+  - notification
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-policy-engine
+  - codexvanta-os-decision-engine

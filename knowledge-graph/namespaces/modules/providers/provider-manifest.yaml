@@ -1,0 +1,7 @@
+apiVersion: codexvantaos.org/v1
+kind: ProviderManifest
+metadata:
+  name: database-postgres
+spec:
+  capability: database
+  provider: postgres

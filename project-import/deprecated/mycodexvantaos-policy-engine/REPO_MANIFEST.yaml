@@ -1,0 +1,28 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-policy-engine
+  description: 策略引擎 — 治理策略定義、驗證、強制執行
+  layer: B-Runtime
+  layerDescription: 運行層 — 核心運行時、事件處理、任務執行
+  plane: Governance
+  planeDescription: 治理面 — 策略、合規、自治
+  tier: 2
+  tags:
+  - governance
+  - policy
+  - compliance
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - policy-definition
+  - policy-validation
+  - policy-enforcement
+  providerDependencies:
+  - database
+  - stateStore
+  repoDependencies:
+  - codexvanta-os-core-kernel

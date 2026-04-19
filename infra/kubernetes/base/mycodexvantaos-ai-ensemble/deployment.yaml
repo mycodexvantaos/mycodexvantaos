@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-ai-ensemble
+spec:
+  selector:
+    matchLabels:
+      app: mycodexvantaos-ai-ensemble
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-ai-ensemble
+    spec:
+      containers:
+      - name: mycodexvantaos-ai-ensemble
+        image: registry.internal/mycodexvantaos/mycodexvantaos-ai-ensemble:latest

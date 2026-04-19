@@ -1,0 +1,21 @@
+apiVersion: platform.mycodexvantaos.org/v1
+kind: ServiceManifest
+metadata:
+  name: mycodexvantaos-app-dev-studio
+spec:
+  id: mycodexvantaos-app-dev-studio
+  tier: 3
+  capabilities:
+    - llm
+    - repo
+    - observability
+    - auth
+  requiredProviders:
+    - llm-gemini
+    - repo-nexus
+    - observability-prometheus
+  deployment:
+    supportedModes:
+      - native
+      - connected
+      - hybrid

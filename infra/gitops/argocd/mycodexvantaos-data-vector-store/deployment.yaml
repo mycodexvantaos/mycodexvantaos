@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-data-vector-store
+spec:
+  selector:
+    matchLabels:
+      app: mycodexvantaos-data-vector-store
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-data-vector-store
+    spec:
+      containers:
+      - name: mycodexvantaos-data-vector-store
+        image: registry.internal/mycodexvantaos/mycodexvantaos-data-vector-store:latest

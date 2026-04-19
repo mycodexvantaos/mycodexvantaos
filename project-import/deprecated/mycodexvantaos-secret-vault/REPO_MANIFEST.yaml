@@ -1,0 +1,27 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-secret-vault
+  description: 密鑰保險庫 — 加密儲存與存取控制
+  layer: C-NativeServices
+  layerDescription: 原生服務層 — 平台內建服務（零第三方依賴可運行）
+  plane: Control
+  planeDescription: 控制面 — 平台核心控制與配置
+  tier: 1
+  tags:
+  - security
+  - secrets
+  - vault
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - secret-management
+  - encryption
+  - rotation
+  providerDependencies:
+  - secrets
+  repoDependencies:
+  - codexvanta-os-core-kernel

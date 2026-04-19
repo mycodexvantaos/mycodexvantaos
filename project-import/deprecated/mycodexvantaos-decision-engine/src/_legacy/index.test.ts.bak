@@ -1,0 +1,119 @@
+/**
+ * CodexvantaOS — decision-engine Enhanced Tests
+ * Provider-chain aware test suite
+ *
+ * Tests:
+ *   1. Service instantiation
+ *   2. Method contract compliance
+ *   3. Provider dependency declaration
+ *   4. Architecture compliance (no direct external imports)
+ *
+ * Run: CODEXVANTA_MODE=native pnpm run test
+ */
+
+import { describe, it, expect } from 'vitest';
+import { RuleEngineService } from '../src/services/rule-engine.service.js';
+import { RoutingService } from '../src/services/routing.service.js';
+
+// ─── Provider Dependencies Declaration ──────────────────────
+const PROVIDER_DEPS: Record<string, string[]> = {
+  RuleEngineService: ['database', 'stateStore'],
+  RoutingService: ['database', 'stateStore', 'observability'],
+};
+
+describe('RuleEngineService', () => {
+  it('should be instantiable', () => {
+    const service = new RuleEngineService();
+    expect(service).toBeDefined();
+    expect(service).toBeInstanceOf(RuleEngineService);
+  });
+
+  it('should implement addRule method', () => {
+    const service = new RuleEngineService();
+    expect(typeof service.addRule).toBe('function');
+  });
+
+  it('should implement removeRule method', () => {
+    const service = new RuleEngineService();
+    expect(typeof service.removeRule).toBe('function');
+  });
+
+  it('should implement evaluate method', () => {
+    const service = new RuleEngineService();
+    expect(typeof service.evaluate).toBe('function');
+  });
+
+  it('should implement listRules method', () => {
+    const service = new RuleEngineService();
+    expect(typeof service.listRules).toBe('function');
+  });
+
+  it('should declare 2 provider dependencies', () => {
+    const deps = PROVIDER_DEPS.RuleEngineService;
+    expect(deps).toBeDefined();
+    expect(deps).toHaveLength(2);
+    expect(deps).toContain('database');
+    expect(deps).toContain('stateStore');
+  });
+
+});
+
+describe('RoutingService', () => {
+  it('should be instantiable', () => {
+    const service = new RoutingService();
+    expect(service).toBeDefined();
+    expect(service).toBeInstanceOf(RoutingService);
+  });
+
+  it('should implement addRoute method', () => {
+    const service = new RoutingService();
+    expect(typeof service.addRoute).toBe('function');
+  });
+
+  it('should implement removeRoute method', () => {
+    const service = new RoutingService();
+    expect(typeof service.removeRoute).toBe('function');
+  });
+
+  it('should implement resolve method', () => {
+    const service = new RoutingService();
+    expect(typeof service.resolve).toBe('function');
+  });
+
+  it('should implement listRoutes method', () => {
+    const service = new RoutingService();
+    expect(typeof service.listRoutes).toBe('function');
+  });
+
+  it('should declare 3 provider dependencies', () => {
+    const deps = PROVIDER_DEPS.RoutingService;
+    expect(deps).toBeDefined();
+    expect(deps).toHaveLength(3);
+    expect(deps).toContain('database');
+    expect(deps).toContain('stateStore');
+    expect(deps).toContain('observability');
+  });
+
+});
+
+describe('Architecture Compliance — decision-engine', () => {
+  it('should have 2 service(s)', () => {
+    expect(Object.keys(PROVIDER_DEPS)).toHaveLength(2);
+  });
+
+  it('should use only valid provider capabilities', () => {
+    const validCaps = [
+      'database', 'storage', 'auth', 'queue', 'stateStore', 'secrets',
+      'repo', 'deploy', 'validation', 'security', 'observability', 'notification',
+    ];
+    Object.values(PROVIDER_DEPS).flat().forEach((dep) => {
+      expect(validCaps).toContain(dep);
+    });
+  });
+
+  it('should follow Native-first / Provider-agnostic principle', () => {
+    // All services access providers via getProviders() pattern
+    // No direct imports of redis, pg, aws-sdk, etc.
+    expect(true).toBe(true); // Validated by CI provider-architecture step
+  });
+});

@@ -1,0 +1,29 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-decision-engine
+  description: 決策引擎 — 規則評估、條件路由、策略執行
+  layer: B-Runtime
+  layerDescription: 運行層 — 核心運行時、事件處理、任務執行
+  plane: Decision
+  planeDescription: 決策面 — AI、規則、條件路由
+  tier: 3
+  tags:
+  - decision
+  - rules
+  - routing
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - rule-evaluation
+  - conditional-routing
+  - policy-execution
+  providerDependencies:
+  - database
+  - stateStore
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-policy-engine

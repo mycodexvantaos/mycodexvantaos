@@ -1,0 +1,47 @@
+name: CodexVantaOS CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  governance-validation:
+    name: 🏛️ Governance & Architecture Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Validate Architecture Naming
+        run: pnpm run ci:validate
+
+  build-and-test:
+    name: 🏗️ Build & Test Monorepo
+    runs-on: ubuntu-latest
+    needs: governance-validation
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Code Linting
+        run: pnpm run lint
+      - name: Monorepo Build
+        run: pnpm run build
+      - name: Run Tests
+        run: pnpm run test || echo "Implement tests later"

@@ -1,0 +1,67 @@
+apiVersion: codexvanta.os/v1
+kind: QueueConfiguration
+metadata:
+  description: Queue topics and configuration — provider-agnostic
+  note: Works with NativeQueueProvider (in-memory) or any external queue (Redis, RabbitMQ,
+    SQS)
+topics:
+  orchestrator.commands:
+    description: Orchestration commands for multi-repo operations
+    maxRetries: 3
+    visibilityTimeout: 60
+    consumers:
+    - codexvanta-os-control-center
+  build.requests:
+    description: Build job requests
+    maxRetries: 2
+    visibilityTimeout: 300
+    consumers:
+    - codexvanta-os-workflows
+  deploy.requests:
+    description: Deployment job requests
+    maxRetries: 2
+    visibilityTimeout: 600
+    consumers:
+    - codexvanta-os-infra-gitops
+  events.platform:
+    description: Platform-wide events
+    maxRetries: 5
+    visibilityTimeout: 30
+    consumers:
+    - codexvanta-os-event-bus
+  notifications.outbound:
+    description: Outbound notification delivery
+    maxRetries: 3
+    visibilityTimeout: 30
+    consumers:
+    - codexvanta-os-observability-stack
+  ai.inference:
+    description: AI inference job queue
+    maxRetries: 1
+    visibilityTimeout: 120
+    consumers:
+    - codexvanta-os-ai-engine
+  data.pipeline:
+    description: Data pipeline processing jobs
+    maxRetries: 3
+    visibilityTimeout: 180
+    consumers:
+    - codexvanta-os-data-pipeline
+  governance.checks:
+    description: Governance and compliance check requests
+    maxRetries: 2
+    visibilityTimeout: 60
+    consumers:
+    - codexvanta-os-governance-autonomy
+  security.scans:
+    description: Security scan requests
+    maxRetries: 2
+    visibilityTimeout: 300
+    consumers:
+    - codexvanta-os-core-kernel
+  scheduler.tasks:
+    description: Scheduled task execution
+    maxRetries: 3
+    visibilityTimeout: 60
+    consumers:
+    - codexvanta-os-scheduler

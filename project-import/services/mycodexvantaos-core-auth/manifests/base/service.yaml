@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mycodexvantaos-auth-service
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-auth-service
+    part-of: mycodexvantaos
+spec:
+  selector:
+    app: mycodexvantaos-auth-service
+  ports:
+    - port: 3001
+      targetPort: 3001
+      protocol: TCP
+  type: ClusterIP

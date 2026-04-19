@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-auth-service
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-auth-service
+    part-of: mycodexvantaos
+    component: auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mycodexvantaos-auth-service
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-auth-service
+        part-of: mycodexvantaos
+    spec:
+      containers:
+        - name: mycodexvantaos-auth-service
+          image: registry.local/mycodexvantaos/mycodexvantaos-auth-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3001
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mycodexvantaos-auth-service-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3001
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3001
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-config-manager
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-config-manager
+    part-of: mycodexvantaos
+    component: config-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mycodexvantaos-config-manager
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-config-manager
+        part-of: mycodexvantaos
+        component: config-manager
+    spec:
+      containers:
+        - name: mycodexvantaos-config-manager
+          image: registry.local/mycodexvantaos/mycodexvantaos-config-manager:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mycodexvantaos-config-manager-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

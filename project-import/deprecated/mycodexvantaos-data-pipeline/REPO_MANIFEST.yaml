@@ -1,0 +1,30 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-data-pipeline
+  description: 資料管線 — ETL、資料流處理、轉換引擎
+  layer: B-Runtime
+  layerDescription: 運行層 — 核心運行時、事件處理、任務執行
+  plane: Data
+  planeDescription: 資料面 — 資料管線、ETL、儲存
+  tier: 2
+  tags:
+  - data
+  - etl
+  - pipeline
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - data-ingestion
+  - data-transformation
+  - data-export
+  providerDependencies:
+  - database
+  - storage
+  - queue
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-event-bus

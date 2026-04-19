@@ -1,0 +1,22 @@
+// Minimal Prisma schema for auth-service — generates PrismaClient types
+  // Required by AuthService.ts: prisma.user.findUnique({ where: { email } }) + prisma.user.create
+  // DATABASE_URL is provided at runtime via env
+
+  generator client {
+    provider = "prisma-client-js"
+  }
+
+  datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+  }
+
+  model User {
+    id        String   @id @default(cuid())
+    email     String   @unique
+    password  String
+    roles     String[] @default(["user"])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+  }
+  

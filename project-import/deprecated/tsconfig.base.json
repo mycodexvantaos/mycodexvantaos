@@ -1,0 +1,4 @@
+{
+  "extends": "../tsconfig.base.json",
+  "$comment": "Forwarding config: resolves '../tsconfig.base.json' from all modules/* subdirectories to the workspace root tsconfig.base.json"
+}

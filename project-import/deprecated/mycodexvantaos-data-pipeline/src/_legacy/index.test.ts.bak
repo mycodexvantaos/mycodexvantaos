@@ -1,0 +1,160 @@
+/**
+ * CodexvantaOS — data-pipeline Enhanced Tests
+ * Provider-chain aware test suite
+ *
+ * Tests:
+ *   1. Service instantiation
+ *   2. Method contract compliance
+ *   3. Provider dependency declaration
+ *   4. Architecture compliance (no direct external imports)
+ *
+ * Run: CODEXVANTA_MODE=native pnpm run test
+ */
+
+import { describe, it, expect } from 'vitest';
+import { IngestionService } from '../src/services/ingestion.service.js';
+import { TransformationService } from '../src/services/transformation.service.js';
+import { ExportService } from '../src/services/export.service.js';
+
+// ─── Provider Dependencies Declaration ──────────────────────
+const PROVIDER_DEPS: Record<string, string[]> = {
+  IngestionService: ['database', 'queue', 'storage', 'observability'],
+  TransformationService: ['database', 'stateStore'],
+  ExportService: ['database', 'storage', 'observability'],
+};
+
+describe('IngestionService', () => {
+  it('should be instantiable', () => {
+    const service = new IngestionService();
+    expect(service).toBeDefined();
+    expect(service).toBeInstanceOf(IngestionService);
+  });
+
+  it('should implement ingest method', () => {
+    const service = new IngestionService();
+    expect(typeof service.ingest).toBe('function');
+  });
+
+  it('should implement getStatus method', () => {
+    const service = new IngestionService();
+    expect(typeof service.getStatus).toBe('function');
+  });
+
+  it('should implement listJobs method', () => {
+    const service = new IngestionService();
+    expect(typeof service.listJobs).toBe('function');
+  });
+
+  it('should implement cancel method', () => {
+    const service = new IngestionService();
+    expect(typeof service.cancel).toBe('function');
+  });
+
+  it('should declare 4 provider dependencies', () => {
+    const deps = PROVIDER_DEPS.IngestionService;
+    expect(deps).toBeDefined();
+    expect(deps).toHaveLength(4);
+    expect(deps).toContain('database');
+    expect(deps).toContain('queue');
+    expect(deps).toContain('storage');
+    expect(deps).toContain('observability');
+  });
+
+});
+
+describe('TransformationService', () => {
+  it('should be instantiable', () => {
+    const service = new TransformationService();
+    expect(service).toBeDefined();
+    expect(service).toBeInstanceOf(TransformationService);
+  });
+
+  it('should implement transform method', () => {
+    const service = new TransformationService();
+    expect(typeof service.transform).toBe('function');
+  });
+
+  it('should implement registerTransformer method', () => {
+    const service = new TransformationService();
+    expect(typeof service.registerTransformer).toBe('function');
+  });
+
+  it('should implement listTransformers method', () => {
+    const service = new TransformationService();
+    expect(typeof service.listTransformers).toBe('function');
+  });
+
+  it('should implement preview method', () => {
+    const service = new TransformationService();
+    expect(typeof service.preview).toBe('function');
+  });
+
+  it('should declare 2 provider dependencies', () => {
+    const deps = PROVIDER_DEPS.TransformationService;
+    expect(deps).toBeDefined();
+    expect(deps).toHaveLength(2);
+    expect(deps).toContain('database');
+    expect(deps).toContain('stateStore');
+  });
+
+});
+
+describe('ExportService', () => {
+  it('should be instantiable', () => {
+    const service = new ExportService();
+    expect(service).toBeDefined();
+    expect(service).toBeInstanceOf(ExportService);
+  });
+
+  it('should implement export method', () => {
+    const service = new ExportService();
+    expect(typeof service.export).toBe('function');
+  });
+
+  it('should implement getStatus method', () => {
+    const service = new ExportService();
+    expect(typeof service.getStatus).toBe('function');
+  });
+
+  it('should implement listExports method', () => {
+    const service = new ExportService();
+    expect(typeof service.listExports).toBe('function');
+  });
+
+  it('should implement download method', () => {
+    const service = new ExportService();
+    expect(typeof service.download).toBe('function');
+  });
+
+  it('should declare 3 provider dependencies', () => {
+    const deps = PROVIDER_DEPS.ExportService;
+    expect(deps).toBeDefined();
+    expect(deps).toHaveLength(3);
+    expect(deps).toContain('database');
+    expect(deps).toContain('storage');
+    expect(deps).toContain('observability');
+  });
+
+});
+
+describe('Architecture Compliance — data-pipeline', () => {
+  it('should have 3 service(s)', () => {
+    expect(Object.keys(PROVIDER_DEPS)).toHaveLength(3);
+  });
+
+  it('should use only valid provider capabilities', () => {
+    const validCaps = [
+      'database', 'storage', 'auth', 'queue', 'stateStore', 'secrets',
+      'repo', 'deploy', 'validation', 'security', 'observability', 'notification',
+    ];
+    Object.values(PROVIDER_DEPS).flat().forEach((dep) => {
+      expect(validCaps).toContain(dep);
+    });
+  });
+
+  it('should follow Native-first / Provider-agnostic principle', () => {
+    // All services access providers via getProviders() pattern
+    // No direct imports of redis, pg, aws-sdk, etc.
+    expect(true).toBe(true); // Validated by CI provider-architecture step
+  });
+});

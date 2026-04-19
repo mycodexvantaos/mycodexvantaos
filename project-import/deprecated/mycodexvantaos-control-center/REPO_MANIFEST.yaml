@@ -1,0 +1,29 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-control-center
+  description: 控制中心 — 多倉庫協調、中央註冊表、架構文檔
+  layer: B-Runtime
+  layerDescription: 運行層 — 核心運行時、事件處理、任務執行
+  plane: Control
+  planeDescription: 控制面 — 平台核心控制與配置
+  tier: 1
+  tags:
+  - control
+  - orchestration
+  - registry
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - orchestration
+  - registry
+  - documentation
+  providerDependencies:
+  - stateStore
+  - repo
+  - notification
+  repoDependencies:
+  - codexvanta-os-core-kernel

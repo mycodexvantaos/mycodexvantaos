@@ -1,0 +1,28 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-event-bus
+  description: 事件匯流排 — 平台內部事件發佈/訂閱
+  layer: B-Runtime
+  layerDescription: 運行層 — 核心運行時、事件處理、任務執行
+  plane: Integration
+  planeDescription: 整合面 — 事件、網路、外部系統
+  tier: 1
+  tags:
+  - runtime
+  - events
+  - pub-sub
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - event-publish
+  - event-subscribe
+  - event-routing
+  providerDependencies:
+  - queue
+  - stateStore
+  repoDependencies:
+  - codexvanta-os-core-kernel

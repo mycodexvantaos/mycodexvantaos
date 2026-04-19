@@ -1,0 +1,7 @@
+apiVersion: codexvantaos.org/v1
+kind: ProviderManifest
+metadata:
+  name: vector-store-pgvector
+spec:
+  capability: vector-store
+  provider: pgvector

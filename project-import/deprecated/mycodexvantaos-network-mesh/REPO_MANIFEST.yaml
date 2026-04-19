@@ -1,0 +1,29 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-network-mesh
+  description: 網路網格 — 服務發現、負載均衡、API閘道
+  layer: B-Runtime
+  layerDescription: 運行層 — 核心運行時、事件處理、任務執行
+  plane: Integration
+  planeDescription: 整合面 — 事件、網路、外部系統
+  tier: 2
+  tags:
+  - networking
+  - mesh
+  - gateway
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - service-discovery
+  - load-balancing
+  - api-gateway
+  providerDependencies:
+  - stateStore
+  - observability
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-config-manager

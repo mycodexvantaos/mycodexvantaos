@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-governance-autonomy
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-governance-autonomy
+    part-of: mycodexvantaos
+    component: governance-autonomy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mycodexvantaos-governance-autonomy
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-governance-autonomy
+        part-of: mycodexvantaos
+        component: governance-autonomy
+    spec:
+      containers:
+        - name: mycodexvantaos-governance-autonomy
+          image: registry.local/mycodexvantaos/mycodexvantaos-governance-autonomy:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mycodexvantaos-governance-autonomy-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

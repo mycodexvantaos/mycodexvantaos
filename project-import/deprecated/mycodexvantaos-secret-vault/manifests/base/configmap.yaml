@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mycodexvantaos-secret-vault-config
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-secret-vault
+    part-of: mycodexvantaos
+data:
+  NODE_ENV: "production"
+  SERVICE_NAME: "mycodexvantaos-secret-vault"
+  PORT: "3000"
+  LOG_LEVEL: "info"

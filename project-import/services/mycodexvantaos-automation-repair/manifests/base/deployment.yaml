@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-automation-core
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-automation-core
+    part-of: mycodexvantaos
+    component: automation-core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mycodexvantaos-automation-core
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-automation-core
+        part-of: mycodexvantaos
+        component: automation-core
+    spec:
+      containers:
+        - name: mycodexvantaos-automation-core
+          image: registry.local/mycodexvantaos/mycodexvantaos-automation-core:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mycodexvantaos-automation-core-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

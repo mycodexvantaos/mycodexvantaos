@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mycodexvantaos-fleet-sandbox-config
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-fleet-sandbox
+    part-of: mycodexvantaos
+data:
+  NODE_ENV: "production"
+  SERVICE_NAME: "mycodexvantaos-fleet-sandbox"
+  PORT: "3000"
+  LOG_LEVEL: "info"

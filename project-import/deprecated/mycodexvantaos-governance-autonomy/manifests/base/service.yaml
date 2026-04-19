@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mycodexvantaos-governance-autonomy
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-governance-autonomy
+    part-of: mycodexvantaos
+spec:
+  selector:
+    app: mycodexvantaos-governance-autonomy
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+  type: ClusterIP

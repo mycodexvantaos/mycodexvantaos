@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-automation-workflows
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-automation-workflows
+    part-of: mycodexvantaos
+    component: automation-workflows
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mycodexvantaos-automation-workflows
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-automation-workflows
+        part-of: mycodexvantaos
+        component: automation-workflows
+    spec:
+      containers:
+        - name: mycodexvantaos-automation-workflows
+          image: registry.local/mycodexvantaos/mycodexvantaos-automation-workflows:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mycodexvantaos-automation-workflows-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

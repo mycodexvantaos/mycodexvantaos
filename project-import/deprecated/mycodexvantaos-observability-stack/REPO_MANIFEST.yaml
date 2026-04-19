@@ -1,0 +1,32 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-observability-stack
+  description: 可觀測性堆疊 — 日誌、指標、追蹤、告警面板
+  layer: C-NativeServices
+  layerDescription: 原生服務層 — 平台內建服務（零第三方依賴可運行）
+  plane: Observability
+  planeDescription: 可觀測面 — 日誌、指標、追蹤
+  tier: 1
+  tags:
+  - observability
+  - logging
+  - metrics
+  - tracing
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - logging
+  - metrics
+  - tracing
+  - alerting
+  - dashboards
+  providerDependencies:
+  - observability
+  - database
+  - notification
+  repoDependencies:
+  - codexvanta-os-core-kernel

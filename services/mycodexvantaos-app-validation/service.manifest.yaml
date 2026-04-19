@@ -1,0 +1,17 @@
+apiVersion: platform.mycodexvantaos.org/v1
+kind: ServiceManifest
+metadata:
+  name: mycodexvantaos-app-validation
+spec:
+  id: mycodexvantaos-app-validation
+  tier: 3
+  capabilities:
+    - validation
+  requiredProviders:
+    - validation-llm
+    - storage-blob
+  deployment:
+    supportedModes:
+      - native
+      - connected
+      - hybrid

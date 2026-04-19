@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Golden base template for all mycodexvantaos microservices.
+# Each service's base/kustomization.yaml references this and applies
+# namePrefix + commonLabels to differentiate the instances.
+
+resources:
+  - deployment.yaml
+  - service.yaml

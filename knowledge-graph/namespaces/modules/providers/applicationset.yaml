@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: mycodexvantaos-workloads
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: in-cluster
+            env: development
+          - cluster: prd-b-cluster
+            env: production
+  template:
+    metadata:
+      name: 'mycodexvantaos-{{env}}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "10"
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/your-org/mycodexvantaos.git'
+        targetRevision: HEAD
+        path: 'infra/kubernetes/overlays/{{env}}'
+      destination:
+        name: '{{cluster}}'
+        namespace: 'mycodexvantaos-{{env}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

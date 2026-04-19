@@ -1,0 +1,160 @@
+apiVersion: codexvanta.os/v1
+kind: DependencyGraph
+metadata:
+  description: Inter-repository dependency graph
+tiers:
+  tier-0:
+    parallel: true
+    repositories:
+    - codexvanta-os-core-kernel
+  tier-1:
+    parallel: true
+    repositories:
+    - codexvanta-os-config-manager
+    - codexvanta-os-control-center
+    - codexvanta-os-core-main
+    - codexvanta-os-event-bus
+    - codexvanta-os-infra-base
+    - codexvanta-os-observability-stack
+    - codexvanta-os-secret-vault
+  tier-2:
+    parallel: true
+    repositories:
+    - codexvanta-os-auth-service
+    - codexvanta-os-cli
+    - codexvanta-os-data-pipeline
+    - codexvanta-os-infra-gitops
+    - codexvanta-os-module-suite
+    - codexvanta-os-network-mesh
+    - codexvanta-os-policy-engine
+    - codexvanta-os-scheduler
+  tier-3:
+    parallel: true
+    repositories:
+    - codexvanta-os-ai-engine
+    - codexvanta-os-app-ui
+    - codexvanta-os-automation-core
+    - codexvanta-os-decision-engine
+    - codexvanta-os-fleet-sandbox
+    - codexvanta-os-workflows
+  tier-4:
+    parallel: true
+    repositories:
+    - codexvanta-os-app-portal
+    - codexvanta-os-core-code-deconstructor
+    - codexvanta-os-governance-autonomy
+dependencies:
+  codexvanta-os-ai-engine:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-data-pipeline
+    tier: 3
+  codexvanta-os-app-portal:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-auth-service
+    - codexvanta-os-app-ui
+    tier: 4
+  codexvanta-os-app-ui:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-auth-service
+    tier: 3
+  codexvanta-os-auth-service:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-secret-vault
+    tier: 2
+  codexvanta-os-automation-core:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-event-bus
+    - codexvanta-os-scheduler
+    tier: 3
+  codexvanta-os-cli:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-config-manager
+    tier: 2
+  codexvanta-os-config-manager:
+    depends_on:
+    - codexvanta-os-core-kernel
+    tier: 1
+  codexvanta-os-control-center:
+    depends_on:
+    - codexvanta-os-core-kernel
+    tier: 1
+  codexvanta-os-core-code-deconstructor:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-ai-engine
+    tier: 4
+  codexvanta-os-core-main:
+    depends_on:
+    - codexvanta-os-core-kernel
+    tier: 1
+  codexvanta-os-data-pipeline:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-event-bus
+    tier: 2
+  codexvanta-os-decision-engine:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-policy-engine
+    tier: 3
+  codexvanta-os-event-bus:
+    depends_on:
+    - codexvanta-os-core-kernel
+    tier: 1
+  codexvanta-os-fleet-sandbox:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-scheduler
+    tier: 3
+  codexvanta-os-governance-autonomy:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-policy-engine
+    - codexvanta-os-decision-engine
+    tier: 4
+  codexvanta-os-infra-base:
+    depends_on:
+    - codexvanta-os-core-kernel
+    tier: 1
+  codexvanta-os-infra-gitops:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-infra-base
+    tier: 2
+  codexvanta-os-module-suite:
+    depends_on:
+    - codexvanta-os-core-kernel
+    tier: 2
+  codexvanta-os-network-mesh:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-config-manager
+    tier: 2
+  codexvanta-os-observability-stack:
+    depends_on:
+    - codexvanta-os-core-kernel
+    tier: 1
+  codexvanta-os-policy-engine:
+    depends_on:
+    - codexvanta-os-core-kernel
+    tier: 2
+  codexvanta-os-scheduler:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-event-bus
+    tier: 2
+  codexvanta-os-secret-vault:
+    depends_on:
+    - codexvanta-os-core-kernel
+    tier: 1
+  codexvanta-os-workflows:
+    depends_on:
+    - codexvanta-os-core-kernel
+    - codexvanta-os-automation-core
+    tier: 3

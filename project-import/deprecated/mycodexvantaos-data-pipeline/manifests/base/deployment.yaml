@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-data-pipeline
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-data-pipeline
+    part-of: mycodexvantaos
+    component: data-pipeline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mycodexvantaos-data-pipeline
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-data-pipeline
+        part-of: mycodexvantaos
+        component: data-pipeline
+    spec:
+      containers:
+        - name: mycodexvantaos-data-pipeline
+          image: registry.local/mycodexvantaos/mycodexvantaos-data-pipeline:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mycodexvantaos-data-pipeline-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "400m"
+              memory: "512Mi"

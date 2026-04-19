@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mycodexvantaos-config-manager-config
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-config-manager
+    part-of: mycodexvantaos
+data:
+  NODE_ENV: "production"
+  SERVICE_NAME: "mycodexvantaos-config-manager"
+  PORT: "3000"
+  LOG_LEVEL: "info"

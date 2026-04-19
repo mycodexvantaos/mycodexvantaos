@@ -1,0 +1,27 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-infra-base
+  description: 基礎設施基底 — Terraform/Pulumi 模板、環境佈建
+  layer: E-DeployTarget
+  layerDescription: 部署目標層 — 多目標部署支援
+  plane: Control
+  planeDescription: 控制面 — 平台核心控制與配置
+  tier: 1
+  tags:
+  - infra
+  - terraform
+  - provisioning
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - infrastructure-provisioning
+  - environment-setup
+  providerDependencies:
+  - deploy
+  - secrets
+  repoDependencies:
+  - codexvanta-os-core-kernel

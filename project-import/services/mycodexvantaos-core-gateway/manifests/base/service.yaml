@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mycodexvantaos-core-main
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-core-main
+    part-of: mycodexvantaos
+spec:
+  selector:
+    app: mycodexvantaos-core-main
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+  type: ClusterIP

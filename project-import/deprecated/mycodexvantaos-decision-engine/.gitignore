@@ -1,0 +1,41 @@
+# --- Node / TypeScript ---
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+*.js.map
+*.d.ts.map
+
+# --- Environment ---
+.env
+.env.*
+!.env.example
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Coverage ---
+coverage/
+.nyc_output/
+
+# --- Package managers ---
+pnpm-debug.log*
+yarn-error.log*
+npm-debug.log*
+
+# --- Misc ---
+tmp/
+temp/
+.cache/

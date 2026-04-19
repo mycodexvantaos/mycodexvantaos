@@ -1,0 +1,7 @@
+apiVersion: codexvantaos.org/v1
+kind: ModuleManifest
+metadata:
+  name: mycodexvantaos-ai-ensemble
+spec:
+  domain: ai
+  capability: ensemble

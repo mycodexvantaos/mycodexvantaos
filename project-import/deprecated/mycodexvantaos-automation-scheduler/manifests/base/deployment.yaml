@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-automation-scheduler
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-automation-scheduler
+    part-of: mycodexvantaos
+    component: automation-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mycodexvantaos-automation-scheduler
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-automation-scheduler
+        part-of: mycodexvantaos
+        component: automation-scheduler
+    spec:
+      containers:
+        - name: mycodexvantaos-automation-scheduler
+          image: registry.local/mycodexvantaos/mycodexvantaos-automation-scheduler:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mycodexvantaos-automation-scheduler-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

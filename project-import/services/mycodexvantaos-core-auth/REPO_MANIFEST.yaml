@@ -1,0 +1,30 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-auth-service
+  description: 認證與授權服務 — JWT、RBAC、Session管理
+  layer: C-NativeServices
+  layerDescription: 原生服務層 — 平台內建服務（零第三方依賴可運行）
+  plane: Control
+  planeDescription: 控制面 — 平台核心控制與配置
+  tier: 2
+  tags:
+  - auth
+  - rbac
+  - jwt
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - authentication
+  - authorization
+  - session-management
+  providerDependencies:
+  - auth
+  - database
+  - stateStore
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-secret-vault

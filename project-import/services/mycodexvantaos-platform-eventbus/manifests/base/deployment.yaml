@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-event-bus
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-event-bus
+    part-of: mycodexvantaos
+    component: event-bus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mycodexvantaos-event-bus
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-event-bus
+        part-of: mycodexvantaos
+        component: event-bus
+    spec:
+      containers:
+        - name: mycodexvantaos-event-bus
+          image: registry.local/mycodexvantaos/mycodexvantaos-event-bus:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mycodexvantaos-event-bus-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"

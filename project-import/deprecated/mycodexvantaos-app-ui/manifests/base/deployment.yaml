@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-app-ui
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-app-ui
+    part-of: mycodexvantaos
+    component: app-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mycodexvantaos-app-ui
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-app-ui
+        part-of: mycodexvantaos
+        component: app-ui
+    spec:
+      containers:
+        - name: mycodexvantaos-app-ui
+          image: registry.local/mycodexvantaos/mycodexvantaos-app-ui:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mycodexvantaos-app-ui-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

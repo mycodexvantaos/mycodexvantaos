@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycodexvantaos-fleet-sandbox
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-fleet-sandbox
+    part-of: mycodexvantaos
+    component: fleet-sandbox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mycodexvantaos-fleet-sandbox
+  template:
+    metadata:
+      labels:
+        app: mycodexvantaos-fleet-sandbox
+        part-of: mycodexvantaos
+        component: fleet-sandbox
+    spec:
+      containers:
+        - name: mycodexvantaos-fleet-sandbox
+          image: registry.local/mycodexvantaos/mycodexvantaos-fleet-sandbox:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mycodexvantaos-fleet-sandbox-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

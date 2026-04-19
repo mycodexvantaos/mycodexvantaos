@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mycodexvantaos-automation-scheduler-config
+  namespace: mycodexvantaos
+  labels:
+    app: mycodexvantaos-automation-scheduler
+    part-of: mycodexvantaos
+data:
+  NODE_ENV: "production"
+  SERVICE_NAME: "mycodexvantaos-automation-scheduler"
+  PORT: "3000"
+  LOG_LEVEL: "info"

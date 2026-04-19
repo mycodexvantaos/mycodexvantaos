@@ -1,0 +1,28 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-module-suite
+  description: 模組套件 — 可擴展模組系統、插件管理
+  layer: A-Builder
+  layerDescription: 建構層 — 代碼生成、AST分析、模組擴展
+  plane: Execution
+  planeDescription: 執行面 — 任務、工作流、自動化
+  tier: 2
+  tags:
+  - builder
+  - modules
+  - plugins
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - module-loading
+  - plugin-management
+  - extension-registry
+  providerDependencies:
+  - database
+  - storage
+  repoDependencies:
+  - codexvanta-os-core-kernel

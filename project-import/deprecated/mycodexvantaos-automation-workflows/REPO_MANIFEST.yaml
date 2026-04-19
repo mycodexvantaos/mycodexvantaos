@@ -1,0 +1,30 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-workflows
+  description: 工作流程連接器 — GitHub Actions、CI/CD 整合
+  layer: D-Connector
+  layerDescription: 連接器層 — 第三方服務整合（可選，非必要）
+  plane: Execution
+  planeDescription: 執行面 — 任務、工作流、自動化
+  tier: 3
+  tags:
+  - connector
+  - ci-cd
+  - github-actions
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - ci-cd
+  - workflow-triggers
+  - pipeline-integration
+  providerDependencies:
+  - repo
+  - deploy
+  - notification
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-automation-core

@@ -1,0 +1,3 @@
+@prefix rel: <https://mycodexvantaos.org/ns/relations#> .
+rel:DEPENDS_ON a rel:RelationshipType .
+rel:PROVIDES_CAPABILITY a rel:RelationshipType .

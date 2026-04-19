@@ -1,0 +1,29 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-core-code-deconstructor
+  description: 代碼解構器 — AST 分析、依賴圖、代碼理解
+  layer: A-Builder
+  layerDescription: 建構層 — 代碼生成、AST分析、模組擴展
+  plane: Execution
+  planeDescription: 執行面 — 任務、工作流、自動化
+  tier: 4
+  tags:
+  - builder
+  - ast
+  - code-analysis
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - ast-analysis
+  - dependency-graph
+  - code-understanding
+  providerDependencies:
+  - database
+  - storage
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-ai-engine

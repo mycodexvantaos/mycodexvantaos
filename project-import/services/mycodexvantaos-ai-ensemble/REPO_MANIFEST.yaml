@@ -1,0 +1,33 @@
+apiVersion: codexvanta.os/v1
+kind: RepoManifest
+metadata:
+  name: codexvanta-os-ai-engine
+  description: AI 引擎 — LLM 整合、推理、Agent 執行
+  layer: B-Runtime
+  layerDescription: 運行層 — 核心運行時、事件處理、任務執行
+  plane: Decision
+  planeDescription: 決策面 — AI、規則、條件路由
+  tier: 3
+  tags:
+  - ai
+  - llm
+  - agent
+  - inference
+spec:
+  architecture:
+    philosophy: native-first / provider-agnostic
+    principle: 第三方服務是擴充出口，不是平台地基
+    mode: native | connected | hybrid
+  capabilities:
+  - llm-inference
+  - agent-execution
+  - embedding
+  - rag
+  providerDependencies:
+  - database
+  - storage
+  - queue
+  - stateStore
+  repoDependencies:
+  - codexvanta-os-core-kernel
+  - codexvanta-os-data-pipeline
