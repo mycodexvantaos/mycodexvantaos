@@ -1,0 +1,18 @@
+apiVersion: mycodexvantaos.org/v1
+kind: Provider
+metadata:
+  name: database-sqlite
+  capability: database
+  labels:
+    source: native
+    tier: "0"
+spec:
+  providerName: sqlite
+  isNative: true
+  lifecycle:
+    stage: stable
+  envVarPrefix: MYCODEXVANTAOS_DATABASE_SQLITE
+  description: |
+    Native SQLite database provider for MyCodexVantaOS.
+    Provides zero-dependency relational database capability in native mode.
+    Supports all standard SQL operations with transaction support.

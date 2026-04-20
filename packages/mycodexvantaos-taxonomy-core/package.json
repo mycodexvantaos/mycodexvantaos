@@ -1,0 +1,45 @@
+{
+  "name": "@mycodexvantaos/taxonomy-core",
+  "version": "1.0.0",
+  "description": "Native MyCodexVantaOS taxonomy system following naming-spec-v1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write src/**/*.ts"
+  },
+  "keywords": [
+    "mycodexvantaos",
+    "taxonomy",
+    "naming",
+    "naming-spec-v1",
+    "governance"
+  ],
+  "author": "MyCodexVantaOS Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mycodexvantaos/mycodexvantaos.git",
+    "directory": "packages/mycodexvantaos-taxonomy-core"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,18 @@
+apiVersion: mycodexvantaos.org/v1
+kind: Provider
+metadata:
+  name: storage-fs
+  capability: storage
+  labels:
+    source: native
+    tier: "0"
+spec:
+  providerName: fs
+  isNative: true
+  lifecycle:
+    stage: stable
+  envVarPrefix: MYCODEXVANTAOS_STORAGE_FS
+  description: |
+    Native filesystem storage provider for MyCodexVantaOS.
+    Provides zero-dependency file storage capability in native mode.
+    Supports all standard file operations with streaming support.

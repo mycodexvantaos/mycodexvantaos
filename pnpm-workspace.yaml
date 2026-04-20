@@ -1,4 +1,11 @@
+# pnpm workspace — mycodexvantaos canonical paths
+# Updated: 2026-04-20
+# Services: 26 modules + 2 apps (arch-guide, zip-synthesis)
 packages:
-  - 'packages/*'
-  - 'services/*'
-  - 'providers/*/*'
+  - "services/*"
+  - "modules/*"
+  - "apps/*"
+  - "packages/*"
+  - "libs/*"
+  - "tools/*"
+  - "providers/*/*"

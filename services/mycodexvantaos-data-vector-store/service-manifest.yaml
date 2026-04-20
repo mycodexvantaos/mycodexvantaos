@@ -1,0 +1,46 @@
+apiVersion: mycodexvantaos.org/v1
+kind: Service
+metadata:
+  name: mycodexvantaos-data-vector-store
+  labels:
+    domain: data
+    capability: vector-store
+spec:
+  description: |
+    Vector storage service for MyCodexVantaOS.
+    Provides semantic search and vector similarity capabilities.
+  
+  requiredProviders:
+    - capability: vector-store
+      source: native
+      fallback: external
+  
+  optionalProviders:
+    - capability: database
+      source: native
+    - capability: observability
+      source: native
+    - capability: secrets
+      source: native
+  
+  endpoints:
+    - path: /health
+      method: GET
+      description: Health check endpoint
+    - path: /collections
+      method: GET
+      description: List all collections
+    - path: /collections/{name}
+      method: POST
+      description: Create a collection
+    - path: /collections/{name}/vectors
+      method: POST
+      description: Upsert vectors
+    - path: /collections/{name}/query
+      method: POST
+      description: Query similar vectors
+  
+  config:
+    defaultDimension: 1536
+    defaultMetric: cosine
+    maxCollectionSize: 1000000

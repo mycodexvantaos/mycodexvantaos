@@ -1,0 +1,67 @@
+apiVersion: mycodexvantaos.org/v1
+kind: Provider
+metadata:
+  name: vector-store-pgvector
+  labels:
+    capability: vector-store
+    provider: pgvector
+    type: external
+spec:
+  providerName: pgvector
+  capability: vector-store
+  isNative: false
+  isExternal: true
+  version: "1.0.0"
+  description: |
+    PGVector vector store provider for PostgreSQL with pgvector extension.
+    Supports vector similarity search, embeddings storage, and hybrid queries.
+  requires:
+    - database-postgres
+  config:
+    host:
+      type: string
+      required: true
+      envVar: MYCODEXVANTAOS_VECTOR_STORE_HOST
+    port:
+      type: number
+      default: 5432
+      envVar: MYCODEXVANTAOS_VECTOR_STORE_PORT
+    database:
+      type: string
+      required: true
+      envVar: MYCODEXVANTAOS_VECTOR_STORE_DATABASE
+    user:
+      type: string
+      required: true
+      envVar: MYCODEXVANTAOS_VECTOR_STORE_USER
+    password:
+      type: secret
+      required: true
+      envVar: MYCODEXVANTAOS_VECTOR_STORE_PASSWORD
+    dimensions:
+      type: number
+      default: 1536
+      envVar: MYCODEXVANTAOS_VECTOR_STORE_DIMENSIONS
+    distanceMetric:
+      type: string
+      default: cosine
+      enum: [cosine, euclidean, inner_product]
+      envVar: MYCODEXVANTAOS_VECTOR_STORE_DISTANCE_METRIC
+    indexType:
+      type: string
+      default: ivfflat
+      enum: [ivfflat, hnsw]
+      envVar: MYCODEXVANTAOS_VECTOR_STORE_INDEX_TYPE
+  capabilities:
+    - createCollection
+    - deleteCollection
+    - insertVectors
+    - updateVectors
+    - deleteVectors
+    - similaritySearch
+    - hybridSearch
+    - batchInsert
+  healthCheck:
+    enabled: true
+    interval: 30s
+    timeout: 5s

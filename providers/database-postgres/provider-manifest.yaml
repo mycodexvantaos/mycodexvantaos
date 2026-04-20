@@ -1,0 +1,57 @@
+apiVersion: mycodexvantaos.org/v1
+kind: Provider
+metadata:
+  name: database-postgres
+  labels:
+    capability: database
+    provider: postgres
+    type: external
+spec:
+  providerName: postgres
+  capability: database
+  isNative: false
+  isExternal: true
+  version: "1.0.0"
+  description: |
+    PostgreSQL database provider for production workloads.
+    Supports connection pooling, transactions, and advanced PostgreSQL features.
+  config:
+    host:
+      type: string
+      required: true
+      envVar: MYCODEXVANTAOS_DATABASE_HOST
+    port:
+      type: number
+      default: 5432
+      envVar: MYCODEXVANTAOS_DATABASE_PORT
+    database:
+      type: string
+      required: true
+      envVar: MYCODEXVANTAOS_DATABASE_NAME
+    user:
+      type: string
+      required: true
+      envVar: MYCODEXVANTAOS_DATABASE_USER
+    password:
+      type: secret
+      required: true
+      envVar: MYCODEXVANTAOS_DATABASE_PASSWORD
+    ssl:
+      type: boolean
+      default: true
+      envVar: MYCODEXVANTAOS_DATABASE_SSL
+    poolSize:
+      type: number
+      default: 10
+      envVar: MYCODEXVANTAOS_DATABASE_POOL_SIZE
+  capabilities:
+    - query
+    - execute
+    - transaction
+    - batch
+    - migrations
+    - streaming
+  healthCheck:
+    enabled: true
+    interval: 30s
+    timeout: 5s

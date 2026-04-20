@@ -1,0 +1,40 @@
+{
+  "name": "@mycodexvantaos/data-vector-store",
+  "version": "1.0.0",
+  "description": "Vector storage service for MyCodexVantaOS",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "jest",
+    "lint": "eslint src --ext .ts"
+  },
+  "keywords": [
+    "mycodexvantaos",
+    "vector-store",
+    "semantic-search",
+    "embedding",
+    "similarity"
+  ],
+  "author": "MyCodexVantaOS Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mycodexvantaos/mycodexvantaos.git",
+    "directory": "services/mycodexvantaos-data-vector-store"
+  },
+  "dependencies": {
+    "@mycodexvantaos/namespaces-sdk": "^1.0.0",
+    "@mycodexvantaos/taxonomy-core": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0",
+    "ts-node": "^10.9.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

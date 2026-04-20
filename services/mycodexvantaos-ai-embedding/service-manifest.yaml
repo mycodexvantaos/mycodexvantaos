@@ -1,0 +1,51 @@
+apiVersion: mycodexvantaos.org/v1
+kind: Service
+metadata:
+  name: mycodexvantaos-ai-embedding
+  labels:
+    domain: ai
+    capability: embedding
+spec:
+  description: |
+    AI embedding service for MyCodexVantaOS.
+    Provides text embedding and LLM capabilities.
+  
+  requiredProviders:
+    - capability: embedding
+      source: native
+      fallback: external
+    - capability: llm
+      source: native
+      fallback: external
+  
+  optionalProviders:
+    - capability: vector-store
+      source: native
+    - capability: observability
+      source: native
+    - capability: secrets
+      source: native
+  
+  endpoints:
+    - path: /health
+      method: GET
+      description: Health check endpoint
+    - path: /embed
+      method: POST
+      description: Generate embeddings for text
+    - path: /embed/batch
+      method: POST
+      description: Generate embeddings for multiple texts
+    - path: /chat
+      method: POST
+      description: Chat completion endpoint
+    - path: /chat/stream
+      method: POST
+      description: Streaming chat completion
+  
+  config:
+    defaultEmbeddingModel: all-MiniLM-L6-v2
+    defaultEmbeddingDimension: 384
+    defaultLLMModel: llama-2-7b
+    maxBatchSize: 100
+    timeout: 30000

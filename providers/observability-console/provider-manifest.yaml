@@ -1,0 +1,18 @@
+apiVersion: mycodexvantaos.org/v1
+kind: Provider
+metadata:
+  name: observability-console
+  capability: observability
+  labels:
+    source: native
+    tier: "0"
+spec:
+  providerName: console
+  isNative: true
+  lifecycle:
+    stage: stable
+  envVarPrefix: MYCODEXVANTAOS_OBSERVABILITY_CONSOLE
+  description: |
+    Native console-based observability provider for MyCodexVantaOS.
+    Provides zero-dependency logging, metrics, and tracing in native mode.
+    Outputs to console with structured JSON format support.

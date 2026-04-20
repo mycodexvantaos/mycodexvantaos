@@ -1,0 +1,32 @@
+{
+  "name": "@mycodexvantaos/vector-store-pgvector",
+  "version": "1.0.0",
+  "description": "PGVector vector store provider for MyCodexVantaOS",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@mycodexvantaos/namespaces-sdk": "^1.0.0",
+    "@mycodexvantaos/database-postgres": "^1.0.0",
+    "pg": "^8.11.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.10.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "mycodexvantaos",
+    "provider",
+    "vector-store",
+    "pgvector",
+    "embeddings",
+    "similarity-search"
+  ],
+  "author": "MyCodexVantaOS Team",
+  "license": "MIT"
+}

@@ -1,0 +1,52 @@
+apiVersion: mycodexvantaos.org/v1
+kind: Provider
+metadata:
+  name: llm-openai
+  labels:
+    capability: llm
+    provider: openai
+    type: external
+spec:
+  providerName: openai
+  capability: llm
+  isNative: false
+  isExternal: true
+  version: "1.0.0"
+  description: |
+    OpenAI LLM provider for large language model operations.
+    Supports GPT-4, GPT-3.5, and embedding models with streaming and function calling.
+  config:
+    apiKey:
+      type: secret
+      required: true
+      envVar: MYCODEXVANTAOS_LLM_API_KEY
+    organization:
+      type: string
+      envVar: MYCODEXVANTAOS_LLM_ORGANIZATION
+    defaultModel:
+      type: string
+      default: gpt-4-turbo-preview
+      envVar: MYCODEXVANTAOS_LLM_DEFAULT_MODEL
+    embeddingModel:
+      type: string
+      default: text-embedding-3-small
+      envVar: MYCODEXVANTAOS_LLM_EMBEDDING_MODEL
+    maxRetries:
+      type: number
+      default: 3
+      envVar: MYCODEXVANTAOS_LLM_MAX_RETRIES
+    timeout:
+      type: number
+      default: 60000
+      envVar: MYCODEXVANTAOS_LLM_TIMEOUT
+  capabilities:
+    - complete
+    - chat
+    - streamChat
+    - embed
+    - embedBatch
+    - functionCall
+  healthCheck:
+    enabled: true
+    interval: 60s
+    timeout: 10s

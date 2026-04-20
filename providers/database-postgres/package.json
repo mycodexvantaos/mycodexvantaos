@@ -1,0 +1,30 @@
+{
+  "name": "@mycodexvantaos/database-postgres",
+  "version": "1.0.0",
+  "description": "PostgreSQL database provider for MyCodexVantaOS",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@mycodexvantaos/namespaces-sdk": "^1.0.0",
+    "pg": "^8.11.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.10.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "mycodexvantaos",
+    "provider",
+    "database",
+    "postgres",
+    "postgresql"
+  ],
+  "author": "MyCodexVantaOS Team",
+  "license": "MIT"
+}
